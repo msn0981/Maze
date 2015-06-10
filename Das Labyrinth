@@ -78,9 +78,9 @@ class MickeyMove():
         ran[1] = (x_fork-1 , y_fork)
         ran[2] = (x_fork , y_fork+1)
         ran[3] = (x_fork , y_fork-1)
-        nexM = self.random(ran)
-        if self.checkFork(nexM[0],nexM[1]) == True:
-            %%%%%%%%           
+        nexMove = self.random(ran)
+        if self.checkFork(nexMove[0],nexMove[1]) == True:
+            return nexMove           
         else:
             choose(x_fork,y_fork)
         
