@@ -80,9 +80,9 @@ class MickeyMove():
         ran[3] = (x_fork , y_fork-1)
         nexM = self.random(ran)
         if self.checkFork(nexM[0],nexM[1]) == True:
-            print (nexM)           
+            %%%%%%%%           
         else:
-            return choose(x_fork,y_fork)
+            choose(x_fork,y_fork)
         
     def setMaze(self,maze):
         self.maze_map = maze
