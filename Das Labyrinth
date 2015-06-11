@@ -23,8 +23,9 @@ class MickeyMove():
         maze = self.maze_map
         if maze[x_fork][y_fork] == 0:
             return True
-        else:
-            return False 
+        elif maze[x_fork][y_fork] == 2:
+            self.choose(x_fork,y_fork)
+            
         
     @classmethod    
     def getMaze(self,val):
@@ -37,14 +38,9 @@ class MickeyMove():
     @classmethod
     def move(self, x_move, y_move):
         maze = self.maze_map
-        path = self.getPath()
-        print("\n")
-        i = x_move
-        j = y_move
-        maze[i][j] = 1
-        if self.checkMove(i,j) == True:
-
-        elif self.checkMove(i,j) == False:
+        self.recStep(x_move,y_move)
+        go = self.choose(x_move,y_move)
+        self.move(go[0],go[1])
     
     @classmethod
     def choose(self,x_fork,y_fork):
@@ -73,17 +69,19 @@ class MickeyMove():
     
     @classmethod
     def choose(self,x_fork,y_fork):
-        maze = self.maze_map
         ran = list(range(4))
         ran[0] = (x_fork+1 , y_fork)
         ran[1] = (x_fork-1 , y_fork)
         ran[2] = (x_fork , y_fork+1)
         ran[3] = (x_fork , y_fork-1)
         nexMove = self.random(ran)
-        if self.checkFork(nexMove[0],nexMove[1]) == True:
-            return nexMove           
+        if nexMove[0] >= 0 and nexMove[1] >= 0:
+            if self.checkFork(nexMove[0],nexMove[1]) == True:
+                return (nexMove[0],nexMove[1])
+            else:
+                self.choose(x_fork,y_fork)
         else:
-            choose(x_fork,y_fork)
+            self.choose(x_fork,y_fork)
         
     def setMaze(self,maze):
         self.maze_map = maze
@@ -116,9 +114,17 @@ def main():
     m = MickeyMove(maze, 1,1)
     #print(m.maze_map)
     #m.printMaze(m.maze_map)
-    m.getMaze(maze)
-    m.move(1,1)
-                
+    #m.getMaze(maze)
+    #m.move(1,1)
+        if m.checkMove(Sx,Sy) == True:
+        m.move(Sx,Sy)
+    else:
+        back = path.get()
+        while back[3] == True:
+            return back[3]
+             
     
 if __name__ == "__main__":
+    Sx = 1
+    Sy = 1
     main()
