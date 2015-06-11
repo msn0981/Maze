@@ -47,28 +47,29 @@ class MickeyMove():
         elif self.checkMove(i,j) == False:
     
     @classmethod
-    def choose(self,i,j):
+    def choose(self,x_fork,y_fork):
         maze = self.maze_map
-        if self.checkMove(i,j) == True:
-            ran = list(range(4))
-            ran[0] = (i+1,j)
-            ran[1] = (i-1,j)
-            ran[2] = (i,j+1)
-            ran[3] = (i,j-1)
-            nexM = self.random(ran)
-            if self.checkMove(nexM[0],nexM[1]) == True:
-                self.recStep(nexM[0],nexM[1])
-            else:
-                print("\n")
+        ran = list(range(4))
+        ran[0] = (x_fork+1 , y_fork)
+        ran[1] = (x_fork-1 , y_fork)
+        ran[2] = (x_fork , y_fork+1)
+        ran[3] = (x_fork , y_fork-1)
+        nexMove = self.random(ran)
+        if self.checkFork(nexMove[0],nexMove[1]) == True:
+            self.recStep(nexMove[0],nexMove[1])
+            return (nexMove[0],nexMove[1])          
+        else:
+            self.choose(x_fork,y_fork)
 
     @classmethod
-    def recStep(self,i,j):
-       path = self.getPath()
+    def recStep(self,x_recstep,y_recstep):
         array = []
-        if self.checkMove(i,j) == True:
-            forkNum = #想要在這裡放計數器讓條數增加
+        if self.checkMove(x_recstep,y_recstep) == True:
             fork = True
-        array.append((i,j,self.checkMove(i,j),fork,forkNum))
+        else:
+            fork = False
+        array.append((x_recstep,y_recstep,self.checkMove(x_recstep,y_recstep),fork))
+        path.put(array)
     
     @classmethod
     def choose(self,x_fork,y_fork):
